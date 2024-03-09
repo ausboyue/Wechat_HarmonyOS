@@ -1,6 +1,6 @@
 ## 微信鸿蒙版
 
-基于鸿蒙(Harmony OS)api 9和ArkTs开发的高仿微信app。
+基于鸿蒙(Harmony OS)api 9和ArkTS开发的高仿微信app
 
 ### 效果图如下
 
