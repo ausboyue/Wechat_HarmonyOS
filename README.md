@@ -7,8 +7,6 @@
 #### 微信Tab
 ![demo1.jpg](art%2Fdemo1.jpg)
 
-<img src="art%2Fdemo1.jpg" width="150"/>
-
 #### 通讯录
 ![demo2.jpg](art%2Fdemo2.jpg)
 
