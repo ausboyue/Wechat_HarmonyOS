@@ -26,10 +26,10 @@
 #### 我Tab
 ![demo4.jpg](art%2Fdemo4.jpg)
 
-#### 聊天页Tab
+#### 聊天页
 ![demo5.jpg](art%2Fdemo5.jpg)
 
-#### 搜索页Tab
+#### 搜索页
 ![demo6.jpg](art%2Fdemo6.jpg)
 
 ### 评语
