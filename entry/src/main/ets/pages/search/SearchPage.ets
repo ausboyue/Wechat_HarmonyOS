@@ -1,14 +1,28 @@
 import prompt from '@ohos.promptAction'
 import router from '@ohos.router'
 import common from '@ohos.app.ability.common';
+import window from '@ohos.window';
 
 @Entry
 @Component
 export default struct SearchPage {
   private context = getContext(this) as common.UIAbilityContext;
   private controller: TextInputController = new TextInputController()
+  private keyboardHeight: number = 0
   @State private searchText: string = ''
   @StorageLink("topHeight") topHeight: number = 0
+
+  async aboutToAppear() {
+    await window.getLastWindow(getContext(this)).then(currentWindow => {
+      currentWindow.on('keyboardHeightChange', (height) => {
+        this.keyboardHeight = height;
+      })
+    })
+  }
+
+  onBackPress() {
+    return this.keyboardHeight > 0
+  }
 
   build() {
     Column() {
@@ -67,7 +81,7 @@ export default struct SearchPage {
           .hitTestBehavior(HitTestMode.None) // NOTE：父组件不消耗触摸事件
           .justifyContent(FlexAlign.SpaceBetween)
 
-          // Search({ placeholder: "搜索", controller: this.controller })
+          // ,({ placeholder: "搜索", controller: this.controller })
           //   .height("100%")
           //   .textFont({ size: 20, weight: 400 })
           //   .placeholderFont({ size: 20, weight: 400 })
@@ -171,7 +185,8 @@ export default struct SearchPage {
         .alignSelf(ItemAlign.Center)
         .margin({ bottom: 80 })
 
-    }.width("100%")
+    }
+    .width("100%")
     .height("100%")
     .alignItems(HorizontalAlign.Start)
     .backgroundColor("#f3f3f3")

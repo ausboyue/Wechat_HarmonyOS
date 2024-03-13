@@ -3,6 +3,7 @@ import prompt from '@ohos.promptAction';
 import Toolbar from '../../component/Toolbar';
 import ListChatContentLeftItem from '../../component/ListChatContentLeftItem';
 import ListChatContentRightItem from '../../component/ListChatContentRightItem';
+import window from '@ohos.window';
 
 @Entry
 @Component
@@ -10,9 +11,19 @@ export default struct ChatPage {
   private name?: string = "微信"
   private controller: TextInputController = new TextInputController()
   @State private chatText: string = ''
+  private keyboardHeight: number = 0
 
-  aboutToAppear() {
+  async aboutToAppear() {
     this.name = router.getParams()['name']
+    await window.getLastWindow(getContext(this)).then(currentWindow => {
+      currentWindow.on('keyboardHeightChange', (height) => {
+        this.keyboardHeight = height;
+      })
+    })
+  }
+
+  onBackPress() {
+    return this.keyboardHeight > 0
   }
 
   build() {
