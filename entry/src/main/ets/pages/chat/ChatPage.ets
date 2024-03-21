@@ -78,7 +78,7 @@ export default struct ChatPage {
           .padding({ left: 40, right: 60 })
           .fontSize(20)
           .fontColor(Color.Black)
-          .borderRadius(8)
+          .borderRadius(12)
             // 设置stateStyles，解决点击编辑框会变色的问题
           .stateStyles({
             normal: {.backgroundColor(Color.White)
@@ -103,18 +103,33 @@ export default struct ChatPage {
           .objectFit(ImageFit.Cover)
           .onClick(unDevTip)
 
+
+        Text("发送")
+          .fontColor(Color.White)
+          .width(65)
+          .textAlign(TextAlign.Center)
+          .height(36)
+          .backgroundColor("#58BE6A")
+          .fontSize(18)
+          .visibility(this.chatText.length == 0 ? Visibility.None : Visibility.Visible)
+          .borderRadius(6)
+          .margin({ left: 10, right: 10 })
+          .onClick(() => {
+            prompt.showToast({ message: this.chatText })
+          })
+
         Image($r("app.media.ic_add"))
           .width(33)
           .height(33)
           .borderRadius(4)
-          .margin({ left: 15, right: 5 })
+          .visibility(this.chatText.length == 0 ? Visibility.Visible : Visibility.None)
+          .margin({ left: 15, right: 8 })
           .objectFit(ImageFit.Cover)
           .onClick(unDevTip)
 
       }.height(55)
       .alignItems(VerticalAlign.Center)
       .backgroundColor("#f9f9f9")
-
     }
     .width("100%")
     .height("100%")
