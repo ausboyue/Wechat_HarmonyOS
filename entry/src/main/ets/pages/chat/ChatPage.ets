@@ -4,6 +4,7 @@ import Toolbar from '../../component/Toolbar';
 import ListChatContentLeftItem from '../../component/ListChatContentLeftItem';
 import ListChatContentRightItem from '../../component/ListChatContentRightItem';
 import window from '@ohos.window';
+import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
 
 @Entry
 @Component
@@ -12,6 +13,7 @@ export default struct ChatPage {
   private controller: TextInputController = new TextInputController()
   @State private chatText: string = ''
   private keyboardHeight: number = 0
+  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
 
   async aboutToAppear() {
     this.name = router.getParams()['name']
@@ -130,6 +132,10 @@ export default struct ChatPage {
       }.height(55)
       .alignItems(VerticalAlign.Center)
       .backgroundColor("#f9f9f9")
+
+      // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
+      Row().height(px2vp(this.navBarHeight))
+
     }
     .width("100%")
     .height("100%")

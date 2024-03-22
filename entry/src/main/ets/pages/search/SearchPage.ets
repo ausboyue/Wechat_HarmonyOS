@@ -2,7 +2,7 @@ import prompt from '@ohos.promptAction'
 import router from '@ohos.router'
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
-import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager';
+import { NAV_BAR_HEIGHT, STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager';
 
 @Entry
 @Component
@@ -12,6 +12,7 @@ export default struct SearchPage {
   private keyboardHeight: number = 0
   @State private searchText: string = ''
   @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
+  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
 
   async aboutToAppear() {
     await window.getLastWindow(getContext(this)).then(currentWindow => {
@@ -185,6 +186,9 @@ export default struct SearchPage {
         .onClick(unDevTip)
         .alignSelf(ItemAlign.Center)
         .margin({ bottom: 80 })
+
+      // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
+      Row().height(px2vp(this.navBarHeight))
 
     }
     .width("100%")
