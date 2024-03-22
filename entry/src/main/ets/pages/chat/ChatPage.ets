@@ -10,7 +10,7 @@ import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
 @Component
 export default struct ChatPage {
   private name?: string = "微信"
-  private controller: TextInputController = new TextInputController()
+  private controller: TextAreaController = new TextAreaController()
   @State private chatText: string = ''
   private keyboardHeight: number = 0
   @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
@@ -53,7 +53,7 @@ export default struct ChatPage {
         }
 
         ListItem() {
-          ListChatContentRightItem()
+          ListChatContentRightItem().margin({ bottom: 15 })
         }
 
       }
@@ -71,16 +71,15 @@ export default struct ChatPage {
           .objectFit(ImageFit.Cover)
           .onClick(unDevTip)
 
-        TextInput({ text: this.chatText, placeholder: '', controller: this.controller })
+        TextArea({ text: this.chatText, placeholder: '', controller: this.controller })
           .placeholderFont({ size: 20, weight: 400 })
           .caretColor(Color.Green)
           .placeholderColor(Color.Grey)
           .layoutWeight(1)
-          .height(40)
-          .padding({ left: 40, right: 60 })
+          .padding({ left: 8, right: 8 })
           .fontSize(20)
           .fontColor(Color.Black)
-          .borderRadius(12)
+          .borderRadius(8)
             // 设置stateStyles，解决点击编辑框会变色的问题
           .stateStyles({
             normal: {.backgroundColor(Color.White)
@@ -94,9 +93,10 @@ export default struct ChatPage {
           .onChange((value: string) => {
             this.chatText = value
           })
-          .onSubmit(() => {
-            prompt.showToast({ message: this.chatText })
-          })
+        // .onSubmit(() => {
+        //   prompt.showToast({ message: this.chatText })
+        // })
+
         Image($r("app.media.ic_emoji_pack"))
           .width(33)
           .height(33)
@@ -129,8 +129,9 @@ export default struct ChatPage {
           .objectFit(ImageFit.Cover)
           .onClick(unDevTip)
 
-      }.height(55)
-      .alignItems(VerticalAlign.Center)
+      }
+      .padding({ top: 10, bottom: 10 })
+      .alignItems(VerticalAlign.Bottom)
       .backgroundColor("#f9f9f9")
 
       // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
