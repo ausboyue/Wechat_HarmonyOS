@@ -2,6 +2,7 @@ import prompt from '@ohos.promptAction'
 import router from '@ohos.router'
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
+import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager';
 
 @Entry
 @Component
@@ -10,7 +11,7 @@ export default struct SearchPage {
   private controller: TextInputController = new TextInputController()
   private keyboardHeight: number = 0
   @State private searchText: string = ''
-  @StorageLink("topHeight") topHeight: number = 0
+  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
 
   async aboutToAppear() {
     await window.getLastWindow(getContext(this)).then(currentWindow => {
@@ -27,7 +28,7 @@ export default struct SearchPage {
   build() {
     Column() {
       // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.topHeight))
+      Row().height(px2vp(this.statusBarHeight))
       Row() {
         Stack() {
           TextInput({ text: this.searchText, placeholder: '搜索', controller: this.controller })

@@ -1,16 +1,17 @@
 import prompt from '@ohos.promptAction'
 import ListMenuItem from '../../component/ListMenuItem'
+import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager'
 
 @Preview
 @Component
 export default struct Mine {
-  @StorageLink("topHeight") topHeight: number = 0
+  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
 
   build() {
     Column() {
       // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
       Row().width("100%")
-        .height(px2vp(this.topHeight))
+        .height(px2vp(this.statusBarHeight))
         .backgroundColor(Color.White)
 
       Row() {

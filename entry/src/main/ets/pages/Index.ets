@@ -2,6 +2,7 @@ import home from './home/Home'
 import contact from './contact/Contact'
 import discovery from './discovery/Discovery'
 import mine from './mine/Mine'
+import { NAV_BAR_HEIGHT } from '../utils/StatusBarManager'
 
 @Entry
 @Component
@@ -11,7 +12,7 @@ struct Index {
   private tabTitles: string[] = ["微信", "通信录", "发现", "我"]
   private tabTextColors: string[] = ["#040404", "#57be6a"]
   private tabTipCounts: number[] = [5, 0, 8, 0]
-  @StorageLink("bottomHeight") bottomHeight: number = 0
+  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
 
   build() {
     Column() {
@@ -48,7 +49,7 @@ struct Index {
       })
 
       // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.bottomHeight))
+      Row().height(px2vp(this.navBarHeight))
     }
     .width('100%')
     .height('100%')
