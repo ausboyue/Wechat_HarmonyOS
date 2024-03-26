@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/search/SearchPage",
-    "pages/chat/ChatPage"
+    "pages/chat/ChatPage",
+    "pages/qrcode/QrCodePage"
   ]
 }

@@ -1,10 +1,10 @@
+import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import WechatToolbar from '../../component/WechatToolbar'
 
 @Preview
 @Component
 export default struct Discovery {
-
   build() {
     Column() {
       WechatToolbar({ title: "发现" })
@@ -19,6 +19,9 @@ export default struct Discovery {
 
       ListMenuItem({ title: "扫一扫",
         iconSrc: $r('app.media.ic_scan') })
+        .onClick(() => {
+          router.pushUrl({ url: 'pages/qrcode/QrCodePage' })
+        })
 
       Divider()
         .vertical(false)
