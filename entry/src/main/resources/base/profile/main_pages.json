@@ -3,6 +3,6 @@
     "pages/Index",
     "pages/search/SearchPage",
     "pages/chat/ChatPage",
-    "pages/qrcode/QrCodePage"
+    "pages/qrcode/MyQrCodePage"
   ]
 }

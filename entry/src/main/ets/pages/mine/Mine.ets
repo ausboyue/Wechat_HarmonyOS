@@ -1,4 +1,5 @@
 import prompt from '@ohos.promptAction'
+import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager'
 
@@ -26,6 +27,7 @@ export default struct Mine {
             .fontColor(Color.Black)
             .fontSize(26)
             .fontWeight(700)
+
           Text("微信号：wx_023021")
             .fontColor(Color.Grey)
             .fontSize(16)
@@ -53,6 +55,7 @@ export default struct Mine {
           .height(16)
           .margin({ top: 38, right: 20 })
 
+
         Image($r("app.media.ic_more"))
           .width(9)
           .height(16.364)
@@ -61,7 +64,9 @@ export default struct Mine {
       }.width("100%")
       .height(203)
       .backgroundColor(Color.White)
-      .onClick(unDevTip)
+      .onClick(() => {
+        router.pushUrl({ url: 'pages/qrcode/MyQrCodePage' })
+      })
 
       Divider()
         .vertical(false)

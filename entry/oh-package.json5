@@ -7,6 +7,5 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "@ohos/zxing": "2.0.0"
   }
 }
