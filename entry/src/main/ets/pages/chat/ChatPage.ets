@@ -5,6 +5,7 @@ import ListChatContentLeftItem from '../../component/ListChatContentLeftItem';
 import ListChatContentRightItem from '../../component/ListChatContentRightItem';
 import window from '@ohos.window';
 import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
+import ChatFunctionBar from './CHatFuntionBar';
 
 @Entry
 @Component
@@ -133,6 +134,8 @@ export default struct ChatPage {
       .padding({ top: 10, bottom: 10 })
       .alignItems(VerticalAlign.Bottom)
       .backgroundColor("#f9f9f9")
+
+      ChatFunctionBar()
 
       // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
       Row().height(px2vp(this.navBarHeight))
