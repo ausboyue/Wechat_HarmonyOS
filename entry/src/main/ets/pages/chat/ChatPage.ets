@@ -13,9 +13,10 @@ export default struct ChatPage {
   private name?: string = "微信"
   private controller: TextAreaController = new TextAreaController()
   @State private chatText: string = ''
-  @State private showFunctionBar: boolean = false
   private keyboardHeight: number = 0
   @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
+  @State private funcBarHeight: number = 0;
+  @State private showFuncBar: boolean = false;
 
   async aboutToAppear() {
     this.name = router.getParams()['name']
@@ -130,7 +131,14 @@ export default struct ChatPage {
           .margin({ left: 15, right: 8 })
           .objectFit(ImageFit.Cover)
           .onClick(() => {
-            this.showFunctionBar = !this.showFunctionBar
+            animateTo({ duration: 400, curve: Curve.Ease }, () => {
+              if (this.showFuncBar) {
+                this.funcBarHeight = 0;
+              } else {
+                this.funcBarHeight = 250;
+              }
+              this.showFuncBar = !this.showFuncBar;
+            })
           })
 
       }
@@ -144,7 +152,8 @@ export default struct ChatPage {
         .strokeWidth(1)
         .lineCap(LineCapStyle.Round)
 
-      ChatFunctionBar().visibility(this.showFunctionBar ? Visibility.Visible : Visibility.None)
+      ChatFunctionBar()
+        .height(this.funcBarHeight)
 
       // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
       Row().height(px2vp(this.navBarHeight))
