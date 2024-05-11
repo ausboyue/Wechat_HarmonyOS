@@ -1,11 +1,9 @@
+import { ChatContentItemData } from '../pages/chat/ChatContentItemData'
+
 @Preview
 @Component
 export default struct ListChatContentLeftItem {
-  data: ChatContentItemData = {
-    self: false,
-    headSrc: $r("app.media.ic_user_head2"),
-    content: "ArkTS是鸿蒙生态的应用开发语言。它在保持TypeScript（简称TS）基本语法风格的基础上，进一步通过规范强化静态检查和分析，使得在程序运行之前的开发期能检测更多错误，提升代码健壮性，并实现更好的运行性能。",
-  }
+  data: ChatContentItemData
 
   build() {
     Row() {
@@ -20,18 +18,26 @@ export default struct ListChatContentLeftItem {
         .commands(`M${vp2px(10)} 0 L0 ${vp2px(7)} ${vp2px(10)} ${vp2px(14)} Z`)
         .fill('rgb(255,255,255)')
         .margin({
-          top:19
+          top: 19
         })
         .strokeWidth(0)
 
       Row() {
-        Text(this.data.content)
-          .fontColor(Color.Black)
-          .fontSize(18)
-          .padding(13.5)
-          .fontWeight(500)
-          .borderRadius(4)
-          .backgroundColor(Color.White)
+        if (this.data.msgType == 0) {
+          Text(this.data.msg)
+            .fontColor(Color.Black)
+            .fontSize(18)
+            .padding(13.5)
+            .fontWeight(500)
+            .borderRadius(4)
+            .backgroundColor(Color.White)
+        } else {
+          Image(this.data.img)
+            .width(150)
+            .borderRadius(4)
+            .objectFit(ImageFit.Auto)
+            .backgroundColor(Color.White)
+        }
       }
       .margin({ right: 80 })
       .layoutWeight(1)
@@ -40,8 +46,3 @@ export default struct ListChatContentLeftItem {
   }
 }
 
-export interface ChatContentItemData {
-  self?: boolean
-  headSrc?: Resource
-  content?: string
-}

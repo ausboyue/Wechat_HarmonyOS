@@ -6,6 +6,7 @@ import ListChatContentRightItem from '../../component/ListChatContentRightItem';
 import window from '@ohos.window';
 import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
 import ChatFunctionBar from './ChatFuntionBar';
+import { ChatContentItemData } from './ChatContentItemData';
 
 @Entry
 @Component
@@ -17,6 +18,62 @@ export default struct ChatPage {
   @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
   @State private funcBarHeight: number = 0;
   @State private showFuncBar: boolean = false;
+  private dataList: ChatContentItemData[] = [
+    {
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 0,
+      self: true,
+      msg: "现在几点了？"
+    },
+    {
+      name: "王昭君",
+      headSrc: $r("app.media.ic_user_head3"),
+      msgType: 0,
+      self: false,
+      msg: "10点，怎么了？"
+    },
+    {
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 1,
+      self: true,
+      msg: "",
+      img: $r("app.media.ic_its_over")
+    },
+    {
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 0,
+      self: true,
+      msg: "我要迟到了！！！",
+    }
+    ,
+    {
+      name: "王昭君",
+      headSrc: $r("app.media.ic_user_head3"),
+      msgType: 1,
+      self: false,
+      msg: "",
+      img: $r("app.media.ic_hahaha")
+    }
+    ,
+    {
+      name: "王昭君",
+      headSrc: $r("app.media.ic_user_head3"),
+      msgType: 0,
+      self: false,
+      msg: "那赶紧粗发吧，哈哈哈哈哈哈哈",
+    }
+    ,
+    {
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 0,
+      self: true,
+      msg: "嗯嗯，不说了，这就飞奔过去。。。",
+    }
+  ]
 
   async aboutToAppear() {
     this.name = router.getParams()['name']
@@ -35,30 +92,18 @@ export default struct ChatPage {
     Column() {
       Toolbar({ title: this.name })
       List({ space: 20, initialIndex: 5 }) {
+        ForEach(this.dataList, (item) => {
+          ListItem() {
+            if (item.self) {
+              ListChatContentRightItem({ data: item })
+            } else {
+              ListChatContentLeftItem({ data: item })
+            }
+          }
+        })
         ListItem() {
-          ListChatContentLeftItem()
+          Row().height(px2vp(20))
         }
-
-        ListItem() {
-          ListChatContentRightItem()
-        }
-
-        ListItem() {
-          ListChatContentLeftItem()
-        }
-
-        ListItem() {
-          ListChatContentRightItem()
-        }
-
-        ListItem() {
-          ListChatContentLeftItem()
-        }
-
-        ListItem() {
-          ListChatContentRightItem().margin({ bottom: 15 })
-        }
-
       }
       .width("100%")
       .height(0)
@@ -168,3 +213,4 @@ export default struct ChatPage {
 const unDevTip = () => {
   prompt.showToast({ message: "功能正在开发中...", duration: 2000 })
 }
+
