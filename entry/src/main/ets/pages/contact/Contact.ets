@@ -81,22 +81,23 @@ export default struct Contact {
     Stack({ alignContent: Alignment.End }) {
 
       Column() {
+        // 标题栏
         WechatToolbar({ title: "通讯录" })
-
+        // 通讯录列表
         List({ scroller: this.scroller }) {
-
+          // 遍历循环大组标签
           ForEach(this.dataList, (item) => {
-            // head
+            // 大组标签
             ListItemGroup({ header: this.itemHead(item.title) }) {
-
+              // 遍历循环大组内的联系人列表
               ForEach(item.contactList, (contact) => {
-                // contact
+                // // 小组联系人列表
                 ListItem() {
                   ListContactItem({ head: contact.head, name: contact.name })
                 }
-                .onClick(()=>{
+                .onClick(() => {
                   router.pushUrl({ url: 'pages/chat/ChatPage',
-                    params: { name: contact.name}
+                    params: { name: contact.name }
                   })
                 })
               })
