@@ -5,7 +5,6 @@ export const STATUS_BAR_HEIGHT = "statusBarHeight"
 export const NAV_BAR_HEIGHT = "navBarHeight"
 
 export default class StatusBarManager {
-
   /**
    * 沉浸式状态栏颜色和状态栏icon
    * 一般推荐这个方案，但这个目前仅是api先支持，部分系统还未跟进支持(目前大多数设备无效)
@@ -33,11 +32,11 @@ export default class StatusBarManager {
   static async immerseFullScreenAsync(windowStage: window.WindowStage) {
     let windowClass: window.Window = await windowStage.getMainWindow()
     // 获取状态栏和导航栏的高度
-    windowClass.on("avoidAreaChange", ({ type, area }) => {
-      if (type == window.AvoidAreaType.TYPE_SYSTEM) {
+    windowClass.on("avoidAreaChange", async data => {
+      if (data.type == window.AvoidAreaType.TYPE_SYSTEM) {
         // 将状态栏和导航栏的高度保存在AppStorage中
-        AppStorage.SetOrCreate<number>(STATUS_BAR_HEIGHT, area.topRect.height);
-        AppStorage.SetOrCreate<number>(NAV_BAR_HEIGHT, area.bottomRect.height);
+        AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
+        AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
       }
     })
     // 设置窗口布局为沉浸式布局
@@ -62,8 +61,8 @@ export default class StatusBarManager {
     let windowClass: window.Window = windowStage.getMainWindowSync()
     let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
     // 获取状态栏和导航栏的高度并保存在AppStorage中
-    AppStorage.SetOrCreate<number>(STATUS_BAR_HEIGHT, area.topRect.height);
-    AppStorage.SetOrCreate<number>(NAV_BAR_HEIGHT, area.bottomRect.height);
+    AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, area.topRect.height);
+    AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, area.bottomRect.height);
 
     // 设置窗口布局为沉浸式布局
     windowClass.setWindowLayoutFullScreen(true)

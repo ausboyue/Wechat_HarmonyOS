@@ -7,6 +7,7 @@ import window from '@ohos.window';
 import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
 import ChatFunctionBar from './ChatFuntionBar';
 import { ChatContentItemData } from './ChatContentItemData';
+import ChatPageParam from './ChatPageParam';
 
 @Entry
 @Component
@@ -76,7 +77,7 @@ export default struct ChatPage {
   ]
 
   async aboutToAppear() {
-    this.name = router.getParams()['name']
+    this.name = (router.getParams() as ChatPageParam) .name
     await window.getLastWindow(getContext(this)).then(currentWindow => {
       currentWindow.on('keyboardHeightChange', (height) => {
         this.keyboardHeight = height;
@@ -92,7 +93,7 @@ export default struct ChatPage {
     Column() {
       Toolbar({ title: this.name })
       List({ space: 20, initialIndex: 5 }) {
-        ForEach(this.dataList, (item) => {
+        ForEach(this.dataList, (item:ChatContentItemData) => {
           ListItem() {
             if (item.self) {
               ListChatContentRightItem({ data: item })

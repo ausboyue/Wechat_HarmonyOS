@@ -3,11 +3,11 @@ import { ChatContentItemData } from '../pages/chat/ChatContentItemData'
 @Preview
 @Component
 export default struct ListChatContentLeftItem {
-  data: ChatContentItemData
+  private data?: ChatContentItemData
 
   build() {
     Row() {
-      Image(this.data.headSrc)
+      Image(this.data?.headSrc)
         .width(48)
         .height(48)
         .borderRadius(4)
@@ -23,8 +23,8 @@ export default struct ListChatContentLeftItem {
         .strokeWidth(0)
 
       Row() {
-        if (this.data.msgType == 0) {
-          Text(this.data.msg)
+        if (this.data?.msgType == 0) {
+          Text(this.data?.msg)
             .fontColor(Color.Black)
             .fontSize(18)
             .padding(13.5)
@@ -32,7 +32,7 @@ export default struct ListChatContentLeftItem {
             .borderRadius(4)
             .backgroundColor(Color.White)
         } else {
-          Image(this.data.img)
+          Image(this.data?.img)
             .width(150)
             .borderRadius(4)
             .objectFit(ImageFit.Auto)

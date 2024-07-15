@@ -4,7 +4,7 @@ export default struct ListMenuItem {
   private iconSrc: Resource = $r('app.media.icon')
   private title: string = "朋友圈"
   private news: string = ""
-  private newsIconSrc: Resource = null
+  private newsIconSrc?: Resource
 
   build() {
     Row() {

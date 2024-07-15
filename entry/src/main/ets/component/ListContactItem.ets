@@ -1,8 +1,8 @@
 @Preview
 @Component
 export default struct ListContactItem {
-  private head: string | PixelMap | Resource
-  private name: string
+  private head: string | PixelMap | Resource = ""
+  private name: string = ""
 
   build() {
     Row() {
