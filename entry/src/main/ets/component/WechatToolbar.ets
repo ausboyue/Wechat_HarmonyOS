@@ -33,6 +33,7 @@ export default struct WechatToolbar {
             .margin({ right: 18 })
             .onClick(() => {
               prompt.showToast({ message: "功能正在开发中...", duration: 2000 })
+              router.pushUrl({ url: 'pages/HardwareIndexPage' })
             })
         }
         .height("100%")

@@ -8,6 +8,12 @@
       "phone",
       "tablet"
     ],
+    "requestPermissions": [
+      {
+        // 允许应用获取数据网络信息
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      }
+    ],
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",

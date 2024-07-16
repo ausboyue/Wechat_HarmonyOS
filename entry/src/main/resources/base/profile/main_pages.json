@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/search/SearchPage",
     "pages/chat/ChatPage",
-    "pages/qrcode/MyQrCodePage"
+    "pages/qrcode/MyQrCodePage",
+    "pages/HardwareIndexPage"
   ]
 }

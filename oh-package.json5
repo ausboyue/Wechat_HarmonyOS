@@ -9,5 +9,8 @@
   "description": "A WeChat DEMO application developed based on Harmony OS.",
   "main": "",
   "version": "1.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "dayjs": "^1.11.7"
+  },
+  "dynamicDependencies": {}
 }
