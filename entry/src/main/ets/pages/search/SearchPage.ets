@@ -1,8 +1,9 @@
-import prompt from '@ohos.promptAction'
-import router from '@ohos.router'
+import prompt from '@ohos.promptAction';
+import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
 import { NAV_BAR_HEIGHT, STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager';
+import { ToastUtils } from '../../utils/ToastUtils';
 
 @Entry
 @Component
@@ -207,5 +208,5 @@ export default struct SearchPage {
 }
 
 const unDevTip = () => {
-  prompt.showToast({ message: "功能正在开发中...", duration: 2000 })
+  ToastUtils.show("功能正在开发中...")
 }

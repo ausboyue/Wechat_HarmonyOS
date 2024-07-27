@@ -1,6 +1,6 @@
 import router from '@ohos.router'
-import prompt from '@ohos.promptAction'
 import { STATUS_BAR_HEIGHT } from '../utils/StatusBarManager'
+import { ToastUtils } from '../utils/ToastUtils'
 
 @Preview
 @Component
@@ -54,5 +54,5 @@ export default struct Toolbar {
 }
 
 const unDevTip = () => {
-  prompt.showToast({ message: "功能正在开发中...", duration: 2000 })
+  ToastUtils.show("功能正在开发中...")
 }

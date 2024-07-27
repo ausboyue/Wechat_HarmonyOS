@@ -8,6 +8,7 @@ import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
 import ChatFunctionBar from './ChatFuntionBar';
 import { ChatContentItemData } from './ChatContentItemData';
 import ChatPageParam from './ChatPageParam';
+import { ToastUtils } from '../../utils/ToastUtils';
 
 @Entry
 @Component
@@ -77,7 +78,7 @@ export default struct ChatPage {
   ]
 
   async aboutToAppear() {
-    this.name = (router.getParams() as ChatPageParam) .name
+    this.name = (router.getParams() as ChatPageParam).name
     await window.getLastWindow(getContext(this)).then(currentWindow => {
       currentWindow.on('keyboardHeightChange', (height) => {
         this.keyboardHeight = height;
@@ -93,7 +94,7 @@ export default struct ChatPage {
     Column() {
       Toolbar({ title: this.name })
       List({ space: 20, initialIndex: 5 }) {
-        ForEach(this.dataList, (item:ChatContentItemData) => {
+        ForEach(this.dataList, (item: ChatContentItemData) => {
           ListItem() {
             if (item.self) {
               ListChatContentRightItem({ data: item })
@@ -128,8 +129,7 @@ export default struct ChatPage {
           .padding({ left: 8, right: 8 })
           .fontSize(20)
           .fontColor(Color.Black)
-          .borderRadius(8)
-            // 设置stateStyles，解决点击编辑框会变色的问题
+          .borderRadius(8)// 设置stateStyles，解决点击编辑框会变色的问题
           .stateStyles({
             normal: {.backgroundColor(Color.White)
             },
@@ -138,7 +138,8 @@ export default struct ChatPage {
             clicked: {.backgroundColor(Color.White)
             },
             focused: {.backgroundColor(Color.White)
-            } })
+            }
+          })
           .onChange((value: string) => {
             this.chatText = value
           })
@@ -212,6 +213,6 @@ export default struct ChatPage {
 }
 
 const unDevTip = () => {
-  prompt.showToast({ message: "功能正在开发中...", duration: 2000 })
+  ToastUtils.show("功能正在开发中...")
 }
 

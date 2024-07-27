@@ -1,7 +1,7 @@
-import prompt from '@ohos.promptAction'
 import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager'
+import { ToastUtils } from '../../utils/ToastUtils'
 
 @Preview
 @Component
@@ -73,7 +73,8 @@ export default struct Mine {
         .color("#f3f3f3")
         .strokeWidth(10)
         .lineCap(LineCapStyle.Round)
-      ListMenuItem({ title: "服务",
+      ListMenuItem({
+        title: "服务",
         iconSrc: $r('app.media.ic_service')
       })
         .onClick(unDevTip)
@@ -82,7 +83,8 @@ export default struct Mine {
         .color("#f3f3f3")
         .strokeWidth(10)
         .lineCap(LineCapStyle.Round)
-      ListMenuItem({ title: "收藏",
+      ListMenuItem({
+        title: "收藏",
         iconSrc: $r("app.media.ic_collect")
       })
         .onClick(unDevTip)
@@ -92,7 +94,8 @@ export default struct Mine {
         .color("#f3f3f3")
         .strokeWidth(1)
         .lineCap(LineCapStyle.Round)
-      ListMenuItem({ title: "朋友圈",
+      ListMenuItem({
+        title: "朋友圈",
         iconSrc: $r('app.media.ic_moment_pic')
       })
         .onClick(unDevTip)
@@ -110,7 +113,8 @@ export default struct Mine {
         .color("#f3f3f3")
         .strokeWidth(1)
         .lineCap(LineCapStyle.Round)
-      ListMenuItem({ title: "表情",
+      ListMenuItem({
+        title: "表情",
         iconSrc: $r('app.media.ic_face_icon')
       }).onClick(unDevTip)
       Divider()
@@ -118,7 +122,8 @@ export default struct Mine {
         .color("#f3f3f3")
         .strokeWidth(10)
         .lineCap(LineCapStyle.Round)
-      ListMenuItem({ title: "设置",
+      ListMenuItem({
+        title: "设置",
         iconSrc: $r('app.media.ic_setting')
       })
         .onClick(unDevTip)
@@ -130,5 +135,5 @@ export default struct Mine {
 }
 
 const unDevTip = () => {
-  prompt.showToast({ message: "二级页面正在开发中...", duration: 2000 })
+  ToastUtils.show("二级页面正在开发中...")
 }

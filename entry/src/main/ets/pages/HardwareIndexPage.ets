@@ -2,7 +2,7 @@ import deviceInfo from '@ohos.deviceInfo'; //设备信息
 import { process } from '@kit.ArkTS'; //系统运行时间
 import { connection } from '@kit.NetworkKit'; //网络连接
 import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration'
+import duration from 'dayjs/plugin/duration';
 import { display } from '@kit.ArkUI'; //屏幕
 import { sensor } from '@kit.SensorServiceKit'; //传感器数组Api
 
