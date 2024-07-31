@@ -11,6 +11,22 @@
     {
       "name": "EntryAbility_label",
       "value": "微信鸿蒙版"
+    },
+    {
+      "name": "net_permission_reason",
+      "value": "APP需要联网"
+    },
+    {
+      "name": "camera_permission_reason",
+      "value": "需要相机权限进行照片上传"
+    },
+    {
+      "name": "read_media_permission_reason",
+      "value": "需要访问相册进行图片上传"
+    },
+    {
+      "name": "write_media_permission_reason",
+      "value": "需要拍照进行照片上传"
     }
   ]
 }

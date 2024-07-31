@@ -1,5 +1,6 @@
 import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
+import { PhotoPickerUtils } from '../../utils/PhotoPickerUtils'
 import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager'
 import { ToastUtils } from '../../utils/ToastUtils'
 
@@ -7,6 +8,7 @@ import { ToastUtils } from '../../utils/ToastUtils'
 @Component
 export default struct Mine {
   @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
+  @State imgPath: string = ""
 
   build() {
     Column() {
@@ -16,11 +18,19 @@ export default struct Mine {
         .backgroundColor(Color.White)
 
       Row() {
-        Image($r('app.media.ic_user_head1'))
+        Image(this.imgPath ? this.imgPath : $r('app.media.ic_user_head1'))
           .width(70)
           .height(70)
           .margin({ left: 25, right: 10 })
           .borderRadius(8)
+          .onClick(() => {
+            PhotoPickerUtils.openGallery(
+              uri => {
+                this.imgPath = uri;
+              }, errMsg => {
+              ToastUtils.show(errMsg)
+            })
+          })
 
         Column() {
           Text("亚瑟王")
