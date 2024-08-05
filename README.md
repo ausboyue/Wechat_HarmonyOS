@@ -1,6 +1,6 @@
 ## 微信鸿蒙版
 
-基于最新鸿蒙API12(HarmonyOS Next)和ArkTS开发的高仿微信APP
+基于最新鸿蒙API 12(HarmonyOS NEXT)和ArkTS开发的高仿微信APP
 
 ![demo0.jpg](art%2Fdemo0.jpg)
 
