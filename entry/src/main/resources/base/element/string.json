@@ -27,6 +27,10 @@
     {
       "name": "write_media_permission_reason",
       "value": "需要拍照进行照片上传"
+    },
+    {
+      "name": "net_info_permission_reason",
+      "value": "需要解析网络状态"
     }
   ]
 }

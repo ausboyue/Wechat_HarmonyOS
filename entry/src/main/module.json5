@@ -9,46 +9,56 @@
       "tablet"
     ],
     "requestPermissions": [
-        {
-          "name": "ohos.permission.INTERNET",
-          "reason": "$string:net_permission_reason",
-          "usedScene": {
-            "abilities": [
-              "EntryAbility"
-            ],
-            "when": "inuse"
-          }
-        },
-        {
-          "name": "ohos.permission.CAMERA",
-          "reason": "$string:camera_permission_reason",
-          "usedScene": {
-            "abilities": [
-              "EntryAbility"
-            ],
-            "when": "inuse"
-          }
-        },
-        {
-          "name": "ohos.permission.READ_MEDIA",
-          "reason": "$string:read_media_permission_reason",
-          "usedScene": {
-            "abilities": [
-              "EntryAbility"
-            ],
-            "when": "inuse"
-          }
-        },
-        {
-          "name": "ohos.permission.WRITE_MEDIA",
-          "reason": "$string:write_media_permission_reason",
-          "usedScene": {
-            "abilities": [
-              "EntryAbility"
-            ],
-            "when": "inuse"
-          }
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "$string:net_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
         }
+      },
+      {
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:camera_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.READ_MEDIA",
+        "reason": "$string:read_media_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.WRITE_MEDIA",
+        "reason": "$string:write_media_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+        "reason": "$string:net_info_permission_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      }
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
