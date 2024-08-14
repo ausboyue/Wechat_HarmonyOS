@@ -50,6 +50,9 @@ export default struct Toolbar {
       .width("100%")
       .justifyContent(FlexAlign.SpaceBetween)
     }
+    .expandSafeArea([SafeAreaType.KEYBOARD])
+    .backgroundColor("#f1f1f1")
+    .zIndex(999)
   }
 }
 
