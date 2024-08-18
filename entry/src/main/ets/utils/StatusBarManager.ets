@@ -38,6 +38,10 @@ export default class StatusBarManager {
         AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
         AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
       }
+      if (data.type == window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR) {
+        // 底部导航栏指示器的高度保存在AppStorage中，这里直接覆盖底部三键导航栏的高度，因为两者显示是互斥的
+        AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+      }
     })
     // 设置窗口布局为沉浸式布局
     windowClass.setWindowLayoutFullScreen(true)
