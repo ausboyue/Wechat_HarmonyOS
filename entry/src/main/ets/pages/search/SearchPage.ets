@@ -29,8 +29,6 @@ export default struct SearchPage {
 
   build() {
     Column() {
-      // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.statusBarHeight))
       Row() {
         Stack() {
           TextInput({ text: this.searchText, placeholder: '搜索', controller: this.controller })
@@ -188,14 +186,12 @@ export default struct SearchPage {
         .alignSelf(ItemAlign.Center)
         .margin({ bottom: 80 })
 
-      // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.navBarHeight))
-
     }
     .width("100%")
     .height("100%")
     .alignItems(HorizontalAlign.Start)
     .backgroundColor("#f3f3f3")
+    .padding({top:px2vp(this.statusBarHeight),bottom:px2vp(this.statusBarHeight)})
     .onKeyEvent((event: KeyEvent) => {
       if (event.type === KeyType.Up) {
         prompt.showToast({

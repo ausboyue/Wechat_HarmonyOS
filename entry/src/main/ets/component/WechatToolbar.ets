@@ -10,9 +10,6 @@ export default struct WechatToolbar {
 
   build() {
     Column() {
-      // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.statusBarHeight))
-
       Stack() {
         Text(this.title)
           .fontColor(Color.Black)
@@ -44,7 +41,7 @@ export default struct WechatToolbar {
       }
       .width("100%")
       .height(53)
-
     }.backgroundColor("#f0f0f0")
+    .padding({ top: px2vp(this.statusBarHeight) })
   }
 }

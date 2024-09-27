@@ -202,13 +202,11 @@ export default struct ChatPage {
       ChatFunctionBar()
         .height(this.funcBarHeight)
 
-      // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.navBarHeight))
-
     }
     .width("100%")
     .height("100%")
     .backgroundColor("#f1f1f1")
+    .padding({ bottom: px2vp(this.navBarHeight) })
   }
 }
 

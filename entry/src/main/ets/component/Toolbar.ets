@@ -13,9 +13,6 @@ export default struct Toolbar {
 
   build() {
     Column() {
-      // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.statusBarHeight))
-
       Row() {
         Image(this.backSrc)
           .width(22)
@@ -53,6 +50,7 @@ export default struct Toolbar {
     .expandSafeArea([SafeAreaType.KEYBOARD])
     .backgroundColor("#f1f1f1")
     .zIndex(999)
+    .padding({top:px2vp(this.statusBarHeight)})
   }
 }
 

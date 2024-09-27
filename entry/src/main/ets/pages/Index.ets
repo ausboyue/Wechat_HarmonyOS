@@ -44,12 +44,11 @@ struct Index {
       .backgroundColor("#f4f4f4")
       .vertical(false)
       .layoutWeight(1)
+      .padding({bottom:px2vp(this.navBarHeight)})
       .onChange((index: number) => {
         this.currentIndex = index
       })
 
-      // 在界面底部放置一个与导航栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().height(px2vp(this.navBarHeight))
     }
     .width('100%')
     .height('100%')
