@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { display } from '@kit.ArkUI'; //屏幕
 import { sensor } from '@kit.SensorServiceKit'; //传感器数组Api
+import { STATUS_BAR_HEIGHT } from '../utils/StatusBarManager';
 
 dayjs.extend(duration)
 
@@ -38,6 +39,7 @@ struct HardwareIndexPage {
   @State displayDensityDPI: number = 0
   // 支持的传感器id列表
   @State supportSensorIds: number[] = []
+  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
 
   onPageShow() {
     this.getDeviceInfo()
@@ -244,6 +246,7 @@ struct HardwareIndexPage {
     .titleMode(NavigationTitleMode.Mini)
     .mode(NavigationMode.Stack)
     .hideBackButton(false)
+    .padding({ top: px2vp(this.statusBarHeight) })
     .linearGradient({
       angle: 180,
       colors: [["#285aee", 0], ["#69b3f7", 0.4], [Color.White, 0.4]]
