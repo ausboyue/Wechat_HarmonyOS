@@ -50,8 +50,8 @@ export default class StatusBarManager {
     windowClass.setWindowSystemBarProperties({
       navigationBarColor: "#00000000",
       statusBarColor: "#00000000",
-      navigationBarContentColor: "#00000000",
-      statusBarContentColor: "#00000000"
+      // navigationBarContentColor: "#FF000000",
+      // statusBarContentColor: "#FF000000"
     })
   }
 

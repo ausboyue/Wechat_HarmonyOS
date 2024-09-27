@@ -1,6 +1,19 @@
 {
   "app": {
     "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/haoyue/.ohos/config/default_Wechat_HarmonyOS_CuNIQx5shjBFpVy1fSeYIpSufanKL4hJfSuJYGlelhg=.cer",
+          "storePassword": "0000001BD827C7CCEDFA2462422582C6E96F7977F92B89A653D9CEF0233C5E8289C24354F391D61DCABD2D",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B0675CB8C59B672012134ACEE5B45E8209A178720ACA5EE7E66A4F0C9E16591EEE347BBEF7802F2",
+          "profile": "/Users/haoyue/.ohos/config/default_Wechat_HarmonyOS_CuNIQx5shjBFpVy1fSeYIpSufanKL4hJfSuJYGlelhg=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/haoyue/.ohos/config/default_Wechat_HarmonyOS_CuNIQx5shjBFpVy1fSeYIpSufanKL4hJfSuJYGlelhg=.p12"
+        }
+      }
     ],
     "products": [
       {
