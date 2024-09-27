@@ -2,7 +2,7 @@ import home from './home/Home'
 import contact from './contact/Contact'
 import discovery from './discovery/Discovery'
 import mine from './mine/Mine'
-import { NAV_BAR_HEIGHT } from '../utils/StatusBarManager'
+import WindowManager from '../utils/WindowManager'
 
 @Entry
 @Component
@@ -12,7 +12,6 @@ struct Index {
   private tabTitles: string[] = ["微信", "通信录", "发现", "我"]
   private tabTextColors: string[] = ["#040404", "#57be6a"]
   private tabTipCounts: number[] = [5, 0, 8, 0]
-  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
 
   build() {
     Column() {
@@ -44,7 +43,7 @@ struct Index {
       .backgroundColor("#f4f4f4")
       .vertical(false)
       .layoutWeight(1)
-      .padding({bottom:px2vp(this.navBarHeight)})
+      .padding({bottom:WindowManager.navBarHeight})
       .onChange((index: number) => {
         this.currentIndex = index
       })

@@ -4,7 +4,7 @@ import Toolbar from '../../component/Toolbar';
 import ListChatContentLeftItem from '../../component/ListChatContentLeftItem';
 import ListChatContentRightItem from '../../component/ListChatContentRightItem';
 import window from '@ohos.window';
-import { NAV_BAR_HEIGHT } from '../../utils/StatusBarManager';
+import WindowManager from '../../utils/WindowManager';
 import ChatFunctionBar from './ChatFuntionBar';
 import { ChatContentItemData } from './ChatContentItemData';
 import ChatPageParam from './ChatPageParam';
@@ -17,7 +17,6 @@ export default struct ChatPage {
   private controller: TextAreaController = new TextAreaController()
   @State private chatText: string = ''
   private keyboardHeight: number = 0
-  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
   @State private funcBarHeight: number = 0;
   @State private showFuncBar: boolean = false;
   private dataList: ChatContentItemData[] = [
@@ -206,7 +205,7 @@ export default struct ChatPage {
     .width("100%")
     .height("100%")
     .backgroundColor("#f1f1f1")
-    .padding({ bottom: px2vp(this.navBarHeight) })
+    .padding({ bottom:WindowManager.navBarHeight })
   }
 }
 

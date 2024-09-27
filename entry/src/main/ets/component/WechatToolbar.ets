@@ -1,12 +1,11 @@
 import router from '@ohos.router'
 import prompt from '@ohos.promptAction'
-import { STATUS_BAR_HEIGHT } from '../utils/StatusBarManager'
+import WindowManager from '../utils/WindowManager'
 
 @Preview
 @Component
 export default struct WechatToolbar {
   private title: string = "发现"
-  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
 
   build() {
     Column() {
@@ -42,6 +41,6 @@ export default struct WechatToolbar {
       .width("100%")
       .height(53)
     }.backgroundColor("#f0f0f0")
-    .padding({ top: px2vp(this.statusBarHeight) })
+    .padding({ top: WindowManager.statusBarHeight })
   }
 }

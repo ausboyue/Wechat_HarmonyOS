@@ -2,8 +2,8 @@ import prompt from '@ohos.promptAction';
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
-import { NAV_BAR_HEIGHT, STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager';
 import { ToastUtils } from '../../utils/ToastUtils';
+import WindowManager from '../../utils/WindowManager';
 
 @Entry
 @Component
@@ -12,8 +12,6 @@ export default struct SearchPage {
   private controller: TextInputController = new TextInputController()
   private keyboardHeight: number = 0
   @State private searchText: string = ''
-  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
-  @StorageLink(NAV_BAR_HEIGHT) navBarHeight: number = 0
 
   async aboutToAppear() {
     await window.getLastWindow(getContext(this)).then(currentWindow => {
@@ -40,8 +38,7 @@ export default struct SearchPage {
             .padding({ left: 40, right: 60 })
             .fontSize(20)
             .fontColor(Color.Black)
-            .borderRadius(8)
-              // 设置stateStyles，解决点击编辑框会变色的问题
+            .borderRadius(8)// 设置stateStyles，解决点击编辑框会变色的问题
             .stateStyles({
               normal: {.backgroundColor(Color.White)
               },
@@ -50,7 +47,8 @@ export default struct SearchPage {
               clicked: {.backgroundColor(Color.White)
               },
               focused: {.backgroundColor(Color.White)
-              } })
+              }
+            })
             .onChange((value: string) => {
               this.searchText = value
             })
@@ -110,8 +108,7 @@ export default struct SearchPage {
           .height("100%")
           .fontWeight(400)
           .textAlign(TextAlign.Center)
-          .fontSize(19)
-            // .alignRules({
+          .fontSize(19)// .alignRules({
             //   top: { anchor: "__container__", align: VerticalAlign.Top },
             //   right: { anchor: "__container__", align: HorizontalAlign.End }
             // })
@@ -191,7 +188,7 @@ export default struct SearchPage {
     .height("100%")
     .alignItems(HorizontalAlign.Start)
     .backgroundColor("#f3f3f3")
-    .padding({top:px2vp(this.statusBarHeight),bottom:px2vp(this.statusBarHeight)})
+    .padding({ top: WindowManager.statusBarHeight, bottom: WindowManager.navBarHeight })
     .onKeyEvent((event: KeyEvent) => {
       if (event.type === KeyType.Up) {
         prompt.showToast({

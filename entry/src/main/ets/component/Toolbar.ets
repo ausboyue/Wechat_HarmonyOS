@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { STATUS_BAR_HEIGHT } from '../utils/StatusBarManager'
+import WindowManager, { STATUS_BAR_HEIGHT } from '../utils/WindowManager'
 import { ToastUtils } from '../utils/ToastUtils'
 
 @Preview
@@ -9,7 +9,6 @@ export default struct Toolbar {
   private backSrc: string | PixelMap | Resource = $r("app.media.ic_back_black")
   private subTitle: string = "更多"
   private subIconSrc: string | PixelMap | Resource = $r("app.media.ic_toolbar_more")
-  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
 
   build() {
     Column() {
@@ -50,7 +49,7 @@ export default struct Toolbar {
     .expandSafeArea([SafeAreaType.KEYBOARD])
     .backgroundColor("#f1f1f1")
     .zIndex(999)
-    .padding({top:px2vp(this.statusBarHeight)})
+    .padding({ top: WindowManager.statusBarHeight })
   }
 }
 

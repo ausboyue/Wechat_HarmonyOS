@@ -4,7 +4,10 @@ export const STATUS_BAR_HEIGHT = "statusBarHeight"
 
 export const NAV_BAR_HEIGHT = "navBarHeight"
 
-export default class StatusBarManager {
+export default class WindowManager {
+  static statusBarHeight: number = 0
+  static navBarHeight: number = 0
+
   /**
    * 沉浸式状态栏颜色和状态栏icon
    * 一般推荐这个方案，但这个目前仅是api先支持，部分系统还未跟进支持(目前大多数设备无效)
@@ -25,6 +28,8 @@ export default class StatusBarManager {
   }
 
   /**
+   * 经测试，异步WindowManager.statusBarHeight，WindowManager.navBarHeight也可以及时赋上值
+   * ，如果各位项目遇到未拿到值得情况可以使用immerseFullScreenSync同步方法，同步方法也没啥性能和卡顿损耗
    * 沉浸式全屏(全屏屏幕，且显示状态栏、导航栏)
    * 异步方法：适合动态监听状态栏，导航栏并做相应调整的方式。这种方案比较麻烦，但是用户体验和性能更好。
    * 仅在Ability使用(Ability全局，且初始化状态栏和导航栏的高度)，建议在 Ability --> onWindowStageCreate 中执行
@@ -37,10 +42,13 @@ export default class StatusBarManager {
         // 将状态栏和导航栏的高度保存在AppStorage中
         AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
         AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+        WindowManager.statusBarHeight = px2vp(data.area.topRect.height)
+        WindowManager.navBarHeight = px2vp(data.area.bottomRect.height)
       }
       if (data.type == window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR) {
         // 底部导航栏指示器的高度保存在AppStorage中，这里直接覆盖底部三键导航栏的高度，因为两者显示是互斥的
         AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+        WindowManager.navBarHeight = px2vp(data.area.bottomRect.height)
       }
     })
     // 设置窗口布局为沉浸式布局
@@ -63,10 +71,22 @@ export default class StatusBarManager {
   static immerseFullScreenSync(windowStage: window.WindowStage) {
     // 同步获取一个主窗口实例
     let windowClass: window.Window = windowStage.getMainWindowSync()
-    let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
-    // 获取状态栏和导航栏的高度并保存在AppStorage中
-    AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, area.topRect.height);
-    AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, area.bottomRect.height);
+    let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
+    let navBar = px2vp(area.bottomRect.height)
+    area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+    const statusBar = px2vp(area.topRect.height)
+    if (!navBar) {
+      // 优先获取底部指示器导航栏高度，如果没有值得再尝试获取常规导航栏高度，两者显示是互斥的
+      navBar = px2vp(area.bottomRect.height)
+    }
+
+    // 将状态栏和导航栏的高度并保存在AppStorage中
+    AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, statusBar);
+    AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, navBar);
+
+    // 将值保存到内存中
+    WindowManager.statusBarHeight = statusBar
+    WindowManager.navBarHeight = navBar
 
     // 设置窗口布局为沉浸式布局
     windowClass.setWindowLayoutFullScreen(true)
@@ -75,8 +95,8 @@ export default class StatusBarManager {
     windowClass.setWindowSystemBarProperties({
       navigationBarColor: "#00000000",
       statusBarColor: "#00000000",
-      navigationBarContentColor: "#00000000",
-      statusBarContentColor: "#00000000"
+      // navigationBarContentColor: "#FF000000",
+      // statusBarContentColor: "#FF000000"
     })
   }
 

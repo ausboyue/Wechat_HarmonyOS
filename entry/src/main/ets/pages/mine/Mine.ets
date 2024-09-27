@@ -1,21 +1,16 @@
 import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import { PhotoPickerUtils } from '../../utils/PhotoPickerUtils'
-import { STATUS_BAR_HEIGHT } from '../../utils/StatusBarManager'
+import WindowManager, { STATUS_BAR_HEIGHT } from '../../utils/WindowManager'
 import { ToastUtils } from '../../utils/ToastUtils'
 
 @Preview
 @Component
 export default struct Mine {
-  @StorageLink(STATUS_BAR_HEIGHT) statusBarHeight: number = 0
   @State imgPath: string = ""
 
   build() {
     Column() {
-      // 在界面顶部放置一个与状态栏同高度的组件，用于占位，可避免界面内容与状态栏内容重叠
-      Row().width("100%")
-        .height(px2vp(this.statusBarHeight))
-        .backgroundColor(Color.White)
 
       Row() {
         Image(this.imgPath ? this.imgPath : $r('app.media.ic_user_head1'))
@@ -74,6 +69,7 @@ export default struct Mine {
       }.width("100%")
       .height(203)
       .backgroundColor(Color.White)
+      .padding({ top: WindowManager.statusBarHeight })
       .onClick(() => {
         router.pushUrl({ url: 'pages/qrcode/MyQrCodePage' })
       })
@@ -141,6 +137,7 @@ export default struct Mine {
     .width("100%")
     .height("100%")
     .backgroundColor("#f0f0f0")
+
   }
 }
 
