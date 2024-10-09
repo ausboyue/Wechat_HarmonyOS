@@ -1,5 +1,5 @@
 import hilog from '@ohos.hilog';
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from '@ohos/hypium';
 
 export default function abilityTest() {
   describe('ActsAbilityTest', function () {

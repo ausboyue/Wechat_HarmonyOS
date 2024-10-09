@@ -40,8 +40,8 @@ export default class WindowManager {
     windowClass.on("avoidAreaChange", async data => {
       if (data.type == window.AvoidAreaType.TYPE_SYSTEM) {
         // 将状态栏和导航栏的高度保存在AppStorage中
-        AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
-        AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+        // AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
+        // AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
         WindowManager.statusBarHeight = px2vp(data.area.topRect.height)
         WindowManager.navBarHeight = px2vp(data.area.bottomRect.height)
       }
@@ -81,8 +81,8 @@ export default class WindowManager {
     }
 
     // 将状态栏和导航栏的高度并保存在AppStorage中
-    AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, statusBar);
-    AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, navBar);
+    // AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, statusBar);
+    // AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, navBar);
 
     // 将值保存到内存中
     WindowManager.statusBarHeight = statusBar

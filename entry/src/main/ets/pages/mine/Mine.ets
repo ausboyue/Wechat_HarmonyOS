@@ -1,7 +1,7 @@
 import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import { PhotoPickerUtils } from '../../utils/PhotoPickerUtils'
-import WindowManager, { STATUS_BAR_HEIGHT } from '../../utils/WindowManager'
+import WindowManager from '../../utils/WindowManager'
 import { ToastUtils } from '../../utils/ToastUtils'
 
 @Preview

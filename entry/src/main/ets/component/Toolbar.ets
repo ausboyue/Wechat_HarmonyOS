@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import WindowManager, { STATUS_BAR_HEIGHT } from '../utils/WindowManager'
+import WindowManager from '../utils/WindowManager'
 import { ToastUtils } from '../utils/ToastUtils'
 
 @Preview
