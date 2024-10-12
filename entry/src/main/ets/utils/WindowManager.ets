@@ -1,9 +1,5 @@
 import window from '@ohos.window';
 
-export const STATUS_BAR_HEIGHT = "statusBarHeight"
-
-export const NAV_BAR_HEIGHT = "navBarHeight"
-
 export default class WindowManager {
   static statusBarHeight: number = 0
   static navBarHeight: number = 0
@@ -39,20 +35,18 @@ export default class WindowManager {
     // 获取状态栏和导航栏的高度
     windowClass.on("avoidAreaChange", async data => {
       if (data.type == window.AvoidAreaType.TYPE_SYSTEM) {
-        // 将状态栏和导航栏的高度保存在AppStorage中
-        // AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, data.area.topRect.height);
-        // AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+        // 将值保存到静态变量中，以便后续使用
         WindowManager.statusBarHeight = px2vp(data.area.topRect.height)
         WindowManager.navBarHeight = px2vp(data.area.bottomRect.height)
       }
       if (data.type == window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR) {
-        // 底部导航栏指示器的高度保存在AppStorage中，这里直接覆盖底部三键导航栏的高度，因为两者显示是互斥的
-        AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, data.area.bottomRect.height);
+        // 这里直接覆盖底部三键导航栏的高度，因为两者显示是互斥的
         WindowManager.navBarHeight = px2vp(data.area.bottomRect.height)
       }
     })
     // 设置窗口布局为沉浸式布局
     windowClass.setWindowLayoutFullScreen(true)
+    // 设置状态栏和导航栏可用
     windowClass.setWindowSystemBarEnable(["status", "navigation"])
     // 设置状态栏和导航栏的背景为透明
     windowClass.setWindowSystemBarProperties({
@@ -74,17 +68,14 @@ export default class WindowManager {
     let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
     let navBar = px2vp(area.bottomRect.height)
     area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+    // 状态栏高度
     const statusBar = px2vp(area.topRect.height)
     if (!navBar) {
-      // 优先获取底部指示器导航栏高度，如果没有值得再尝试获取常规导航栏高度，两者显示是互斥的
+      // 优先获取底部指示器导航栏高度，如果没有值得再尝试获取常规导航栏(鸿蒙5.0以下的传统底部三键导航栏)高度，两者显示是互斥的
       navBar = px2vp(area.bottomRect.height)
     }
 
-    // 将状态栏和导航栏的高度并保存在AppStorage中
-    // AppStorage.setOrCreate<number>(STATUS_BAR_HEIGHT, statusBar);
-    // AppStorage.setOrCreate<number>(NAV_BAR_HEIGHT, navBar);
-
-    // 将值保存到内存中
+    // 将值保存到静态变量中，以便后续使用
     WindowManager.statusBarHeight = statusBar
     WindowManager.navBarHeight = navBar
 
