@@ -58,6 +58,15 @@
           ],
           "when": "inuse"
         }
+      },
+      {
+        "name": "ohos.permission.VIBRATE",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
       }
     ],
     "deliveryWithInstall": true,
