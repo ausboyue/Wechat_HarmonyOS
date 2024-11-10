@@ -3,7 +3,6 @@ import contact from './contact/Contact'
 import discovery from './discovery/Discovery'
 import mine from './mine/Mine'
 import WindowManager from '../utils/WindowManager'
-import { router } from '@kit.ArkUI'
 
 @Entry
 @Component
@@ -13,13 +12,6 @@ struct Index {
   private tabTitles: string[] = ["微信", "通信录", "发现", "我"]
   private tabTextColors: string[] = ["#040404", "#57be6a"]
   private tabTipCounts: number[] = [5, 0, 8, 0]
-
-  aboutToAppear(): void {
-    router.pushUrl({
-      url: 'pages/chat/ChatPage',
-      params: { name: "阿拉蕾" }
-    })
-  }
 
   build() {
     Column() {

@@ -165,7 +165,7 @@ export default struct ChatPage {
   textValue: string = ""
   // 输入状态 语音或者文字
   @State
-  inputType: WXInputType = WXInputType.voice
+  inputType: WXInputType = WXInputType.keyboard
   // 语音识别的文字
   @State
   voiceToText: string = ""
