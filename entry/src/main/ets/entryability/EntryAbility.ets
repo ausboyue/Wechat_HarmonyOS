@@ -16,7 +16,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
-    WindowManager.immerseFullScreenAsync(windowStage)
+    WindowManager.immerseFullScreenSync(windowStage)
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
