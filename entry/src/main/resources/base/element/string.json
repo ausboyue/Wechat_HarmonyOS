@@ -31,6 +31,10 @@
     {
       "name": "net_info_permission_reason",
       "value": "需要解析网络状态"
+    },
+    {
+      "name": "voice_reason",
+      "value": "用于获取用户的录音"
     }
   ]
 }

@@ -23,14 +23,42 @@ export default struct ListChatContentLeftItem {
         .strokeWidth(0)
 
       Row() {
-        if (this.data?.msgType == 0) {
+        if (this.data?.msgType === 0) {
           Text(this.data?.msg)
             .fontColor(Color.Black)
             .fontSize(18)
-            .padding(13.5)
             .fontWeight(500)
             .borderRadius(4)
             .backgroundColor(Color.White)
+            .padding({
+              left: 14,
+              right: 14,
+              top: 10,
+              bottom: 10
+            })
+
+        } else if (this.data?.msgType === 2) {
+          Row() {
+            Text(this.data?.msg)
+              .fontColor(Color.Black)
+              .fontSize(18)
+              .fontWeight(500)
+
+            Image(this.data?.img)
+              .width(28)
+              .width(28)
+              .margin({ left: 1 })
+              .objectFit(ImageFit.Auto)
+          }
+          .padding({
+            left: 14,
+            right: 14,
+            top: 10,
+            bottom: 10
+          })
+          .borderRadius(4)
+          .backgroundColor("#a9ea7a")
+
         } else {
           Image(this.data?.img)
             .width(150)

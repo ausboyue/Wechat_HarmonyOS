@@ -3,6 +3,7 @@ import contact from './contact/Contact'
 import discovery from './discovery/Discovery'
 import mine from './mine/Mine'
 import WindowManager from '../utils/WindowManager'
+import { router } from '@kit.ArkUI'
 
 @Entry
 @Component
@@ -13,6 +14,13 @@ struct Index {
   private tabTextColors: string[] = ["#040404", "#57be6a"]
   private tabTipCounts: number[] = [5, 0, 8, 0]
 
+  aboutToAppear(): void {
+    router.pushUrl({
+      url: 'pages/chat/ChatPage',
+      params: { name: "阿拉蕾" }
+    })
+  }
+
   build() {
     Column() {
       Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
@@ -21,16 +29,19 @@ struct Index {
           home()
         }
         .tabBar(this.createTabMenu(0))
+
         // 通讯录
         TabContent() {
           contact()
         }
         .tabBar(this.createTabMenu(1))
+
         // 发现
         TabContent() {
           discovery()
         }
         .tabBar(this.createTabMenu(2))
+
         // 我的
         TabContent() {
           mine()
@@ -43,7 +54,7 @@ struct Index {
       .backgroundColor("#f4f4f4")
       .vertical(false)
       .layoutWeight(1)
-      .padding({bottom:WindowManager.navBarHeight})
+      .padding({ bottom: WindowManager.navBarHeight })
       .onChange((index: number) => {
         this.currentIndex = index
       })
@@ -53,7 +64,8 @@ struct Index {
     .height('100%')
   }
 
-  @Builder createTabMenu(index: number) {
+  @Builder
+  createTabMenu(index: number) {
 
     Stack({ alignContent: Alignment.Center }) {
 
@@ -62,7 +74,12 @@ struct Index {
         count: this.tabTipCounts[index],
         maxCount: 99,
         position: BadgePosition.RightTop,
-        style: { color: 0xFFFFFF, fontSize: 13, badgeSize: 20, badgeColor: Color.Red }
+        style: {
+          color: 0xFFFFFF,
+          fontSize: 13,
+          badgeSize: 20,
+          badgeColor: Color.Red
+        }
       }) {
         Column() {
           /**
@@ -74,7 +91,8 @@ struct Index {
            None  不进行任何缩放操作，即使图片溢出容器也不会被裁剪或缩放
            */
           // icon图标
-          Image(this.currentIndex === index ? `/images/main_page_index${index}_pre.png` : `/images/main_page_index${index}_nor.png`)
+          Image(this.currentIndex === index ? `/images/main_page_index${index}_pre.png` :
+            `/images/main_page_index${index}_nor.png`)
             .width(29.714)
             .height(26)
             .objectFit(ImageFit.Fill)

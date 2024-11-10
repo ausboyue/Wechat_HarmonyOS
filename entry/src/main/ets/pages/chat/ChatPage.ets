@@ -13,6 +13,7 @@ import SpeechRecognizerManager from '../../utils/SpeechRecognizerManager';
 import { AudioCaptureManager, RecordFile } from '../../utils/AudioCapturerManager';
 import { componentUtils } from '@kit.ArkUI';
 import { vibrator } from '@kit.SensorServiceKit';
+import { PermissionUtils } from '../../utils/PermissionUtils';
 
 enum WXInputType {
   /**
@@ -103,7 +104,7 @@ export default struct ChatPage {
   private keyboardHeight: number = 0
   @State private funcBarHeight: number = 0;
   @State private showFuncBar: boolean = false;
-  private dataList: ChatContentItemData[] = [
+  @State private dataList: ChatContentItemData[] = [
     {
       name: "鲁班",
       headSrc: $r("app.media.ic_user_head2"),
@@ -288,6 +289,14 @@ export default struct ChatPage {
     const voiceChat = new ChatMessage(MessageType.voice, res.recordFilePath, duration)
     //   插入到消息数组中
     this.chatList.push(voiceChat)
+    this.dataList.push({
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 2,
+      self: true,
+      msg: `${duration}"`,
+      img: $r("app.media.ic_voice_msg_right")
+    })
   }
   // 开启ai实时转换声音
   onStartSpeechRecognize = () => {
@@ -347,7 +356,11 @@ export default struct ChatPage {
             .borderRadius(4)
             .margin({ left: 15, right: 15 })
             .objectFit(ImageFit.Cover)
-            .onClick(() => {
+            .onClick(async () => {
+              const result = await PermissionUtils.request(["ohos.permission.MICROPHONE"])
+              if (!result) {
+                ToastUtils.show("请先授权麦克风权限")
+              }
               this.inputType = WXInputType.voice
               this.showFuncBarWithAnim(false)
             })
@@ -584,7 +597,7 @@ export default struct ChatPage {
             x: "-50%",
           })
 
-        Image($r("app.media.ic_use_voice"))
+        Image($r("app.media.ic_voice_msg_left"))
           .width(33)
           .height(33)
           .objectFit(ImageFit.Cover)
