@@ -164,7 +164,7 @@ export default struct ChatPage {
   textValue: string = ""
   // 输入状态 语音或者文字
   @State
-  inputType: WXInputType = WXInputType.keyboard
+  inputType: WXInputType = WXInputType.voice
   // 语音识别的文字
   @State
   voiceToText: string = ""
@@ -183,14 +183,8 @@ export default struct ChatPage {
   context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings)
   // 声明波纹定时器id
   voiceTimeId: number = -1
-  // “x ”的坐标
-  xScreenOffset: ScreenOffset = {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0
-  }
-  TextScreenOffset: ScreenOffset = {
+  // 底部录音气泡的坐标
+  bubbleScreenOffset: ScreenOffset = {
     x: 0,
     y: 0,
     width: 0,
@@ -230,11 +224,9 @@ export default struct ChatPage {
       const x = event.touches[0].displayX
       const y = event.touches[0].displayY
       // 判断是否碰到了 “X”
-      let isTouchX = this.xScreenOffset.x <= x && this.xScreenOffset.x + this.xScreenOffset.width >= x &&
-        this.xScreenOffset.y <= y && this.xScreenOffset.y + this.xScreenOffset.width >= y
+      let isTouchX = x <= this.bubbleScreenOffset.width / 2 && y < this.bubbleScreenOffset.y
       // 判断是否碰到了 "文"
-      let isTouchText = this.TextScreenOffset.x <= x && this.TextScreenOffset.x + this.TextScreenOffset.width >= x &&
-        this.TextScreenOffset.y <= y && this.TextScreenOffset.y + this.TextScreenOffset.width >= y
+      let isTouchText = x > this.bubbleScreenOffset.width / 2 && y < this.bubbleScreenOffset.y
       if (isTouchX) {
         // 取消发送
         this.pressCancelVoicePostText = PressCancelVoicePostText.cancelVoice
@@ -527,6 +519,7 @@ export default struct ChatPage {
 
       // 取消和转文字
       Row() {
+        // X
         Row() {
           Text("X")
             .fontSize(20)
@@ -541,15 +534,9 @@ export default struct ChatPage {
             .fontColor("#ccc")
             .id("cancel_record")
             .rotate({ angle: -15 })
-            .onAppear(() => {
-              let modePosition: componentUtils.ComponentInfo = componentUtils.getRectangleById("cancel_record");
-              this.xScreenOffset.x = px2vp(modePosition.screenOffset.x)
-              this.xScreenOffset.y = px2vp(modePosition.screenOffset.y)
-              this.xScreenOffset.width = px2vp(modePosition.size.width)
-              this.xScreenOffset.height = px2vp(modePosition.size.height)
-            })
         }
 
+        // 文
         Row() {
           Text("文")
             .fontSize(20)
@@ -562,15 +549,6 @@ export default struct ChatPage {
             .align(Alignment.Center)
             .id("translate_text")
             .rotate({ angle: 15 })
-            .onAppear(() => {
-              let modePosition: componentUtils.ComponentInfo = componentUtils.getRectangleById("translate_text");
-              // px单位
-              this.TextScreenOffset.x = px2vp(modePosition.screenOffset.x)
-              this.TextScreenOffset.y = px2vp(modePosition.screenOffset.y)
-              this.TextScreenOffset.width = px2vp(modePosition.size.width)
-              this.TextScreenOffset.height = px2vp(modePosition.size.height)
-            })
-
         }
 
         // 3  松开发送
@@ -593,21 +571,38 @@ export default struct ChatPage {
         left: 35, right: 35
       })
 
+
       Stack() {
+        Text()
+          .width(800)
+          .height(800)
+          .backgroundColor("#AAAAAA")
+          .borderRadius("50%")// .position({ top: 0 ,left:"-50%"})
+            // .position({ top: 0 ,left:"-50%"})
+          .position({ top: 0, left: "50%" })
+          .translate({
+            x: "-50%",
+          })
+
         Image($r("app.media.ic_use_voice"))
           .width(33)
           .height(33)
           .objectFit(ImageFit.Cover)
-          .margin({ top: 50 })
       }
-      .width(800)
-      .height(800)
-      .backgroundColor("#AAAAAA")
-      .alignContent(Alignment.Top)
-      .translate({
-        y: "86%"
+      .width("100%")
+      .height(150)
+      .alignContent(Alignment.Center)
+      .position({
+        bottom: 0
       })
-      .borderRadius("50%")
+      .id("bottom_bubble")
+      .onAppear(() => {
+        let modePosition: componentUtils.ComponentInfo = componentUtils.getRectangleById("bottom_bubble");
+        this.bubbleScreenOffset.x = px2vp(modePosition.localOffset.x)
+        this.bubbleScreenOffset.y = px2vp(modePosition.localOffset.y)
+        this.bubbleScreenOffset.width = px2vp(modePosition.size.width)
+        this.bubbleScreenOffset.height = px2vp(modePosition.size.height)
+      })
 
     }
     .width("100%")
@@ -644,7 +639,7 @@ export default struct ChatPage {
       // 触发马达振动
       vibrator.startVibration({
         type: 'time',
-        duration: 200,
+        duration: 100,
       }, {
         id: 0,
         usage: 'touch'
