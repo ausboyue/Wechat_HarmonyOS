@@ -108,9 +108,9 @@ export class AudioCaptureManager {
   // 静态异步方法，用于停止录音过程
   static async stopRecord() {
     // 停止音频捕获器的工作
-    await AudioCaptureManager.audioCapturer?.stop();
+    AudioCaptureManager.audioCapturer?.stop();
     // 释放音频捕获器的资源
-    await AudioCaptureManager.audioCapturer?.release();
+    AudioCaptureManager.audioCapturer?.release();
     // 清除音频捕获器实例
     AudioCaptureManager.audioCapturer = null;
     // 记录结束录音的时间戳

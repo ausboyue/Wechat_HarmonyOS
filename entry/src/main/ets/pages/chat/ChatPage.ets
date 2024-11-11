@@ -297,6 +297,7 @@ export default struct ChatPage {
       msg: `${duration}"`,
       img: $r("app.media.ic_voice_msg_right")
     })
+    this.scroller.scrollToIndex(this.dataList.length)
   }
   // 开启ai实时转换声音
   onStartSpeechRecognize = () => {
