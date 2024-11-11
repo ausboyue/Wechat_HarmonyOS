@@ -1,5 +1,4 @@
 import router from '@ohos.router';
-import prompt from '@ohos.promptAction';
 import Toolbar from '../../component/Toolbar';
 import ListChatContentLeftItem from '../../component/ListChatContentLeftItem';
 import ListChatContentRightItem from '../../component/ListChatContentRightItem';
@@ -100,6 +99,7 @@ interface ScreenOffset {
 export default struct ChatPage {
   private name?: string = "微信"
   private controller: TextAreaController = new TextAreaController()
+  private scroller: Scroller = new Scroller()
   @State private chatText: string = ''
   private keyboardHeight: number = 0
   @State private funcBarHeight: number = 0;
@@ -328,7 +328,7 @@ export default struct ChatPage {
   build() {
     Column() {
       Toolbar({ title: this.name })
-      List({ space: 20, initialIndex: 5 }) {
+      List({ space: 20, initialIndex: this.dataList.length, scroller: this.scroller }) {
         ForEach(this.dataList, (item: ChatContentItemData) => {
           ListItem() {
             if (item.self) {
@@ -431,7 +431,7 @@ export default struct ChatPage {
           .borderRadius(6)
           .margin({ left: 10, right: 10 })
           .onClick(() => {
-            prompt.showToast({ message: this.chatText })
+            this.sendTextMsg()
           })
 
         Image($r("app.media.ic_add"))
@@ -467,6 +467,18 @@ export default struct ChatPage {
     .height("100%")
     .backgroundColor("#f1f1f1")
     .padding({ bottom: WindowManager.navBarHeight })
+  }
+
+  private sendTextMsg() {
+    this.dataList.push({
+      name: "鲁班",
+      headSrc: $r("app.media.ic_user_head2"),
+      msgType: 0,
+      self: true,
+      msg: this.chatText,
+    })
+    this.scroller.scrollToIndex(this.dataList.length)
+    this.chatText = ""
   }
 
   private showFuncBarWithAnim(show: boolean) {
