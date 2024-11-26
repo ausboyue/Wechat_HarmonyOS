@@ -293,6 +293,7 @@ export default struct ChatPage {
       name: "鲁班",
       headSrc: $r("app.media.ic_user_head2"),
       msgType: 2,
+      voicePath: res.recordFilePath,
       self: true,
       msg: `${duration}"`,
       img: $r("app.media.ic_voice_msg_right")
