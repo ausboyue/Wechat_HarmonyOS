@@ -14,10 +14,16 @@ class AudioRendererManager {
    */
   private static audioRender: audio.AudioRenderer | null = null
 
+  /** 执行播放 */
+  static async doPlay(fileName: string) {
+    await AudioRendererManager.ready(fileName)
+    AudioRendererManager.start()
+  }
+
   /**
-   * 初始化
+   * 初始化准备
    */
-  static async init(fileName: string) {
+  private static async ready(fileName: string) {
 
     try {
       let bufferSize: number = 0;

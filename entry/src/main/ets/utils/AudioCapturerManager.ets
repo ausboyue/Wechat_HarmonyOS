@@ -54,8 +54,8 @@ export class AudioCaptureManager {
   }
 
   // 静态异步方法，用于启动录音过程
-  static startRecord(fileName: string) {
-    AudioCaptureManager.createAudioCapturer()
+  static async startRecord(fileName: string) {
+    await AudioCaptureManager.createAudioCapturer()
     // 记录开始录音的时间戳
     AudioCaptureManager.startRecordTime = Date.now();
     try {

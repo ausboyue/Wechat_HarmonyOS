@@ -1,4 +1,5 @@
 import { ChatContentItemData } from '../pages/chat/ChatContentItemData'
+import AudioRendererManager from '../utils/AudioRendererManager'
 
 @Preview
 @Component
@@ -58,6 +59,7 @@ export default struct ListChatContentLeftItem {
           })
           .borderRadius(4)
           .backgroundColor("#a9ea7a")
+          .onClick(this.playVoice)
 
         } else {
           Image(this.data?.img)
@@ -71,6 +73,16 @@ export default struct ListChatContentLeftItem {
       .layoutWeight(1)
 
     }.alignItems(VerticalAlign.Top)
+  }
+
+  playVoice = async () => {
+    if (this.data?.voicePath) {
+      AudioRendererManager.doPlay(this.data?.voicePath)
+    }
+  }
+
+  aboutToDisappear(): void {
+    AudioRendererManager.release()
   }
 }
 
