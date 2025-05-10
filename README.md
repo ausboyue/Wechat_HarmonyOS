@@ -1,6 +1,6 @@
 ## 微信鸿蒙版
 
-基于最新鸿蒙API 12(HarmonyOS NEXT)和ArkTS开发的高仿微信APP
+基于最新鸿蒙API 15(HarmonyOS NEXT)和ArkTS开发的高仿微信APP
 
 ![demo0.jpg](art%2Fdemo0.jpg)
 
@@ -34,11 +34,10 @@
 
 ### 评语
 
-1. 鸿蒙开发设计简直是Android+Flutter的合体，对有之开发经验的童鞋非常友好
-2. TS语言壁垒在鸿蒙这块降得非常低，低学习成本，很好上手
-3. 鸿蒙底层API缺陷目前还挺多，比如状态栏调控支持，返回键拦截支持，Toast被输入法覆盖等
-4. 总得来说，非常nice，效率和舒适度比Android和Flutter高很多，内置控件和容器非常丰富，并且可定制化能力也很高
-5. 未来可期，同时期待Flutter早日完美适配鸿蒙
+1. 鸿蒙开发设计结合了Android，IOS，FLutter，RN等平台和方案的优点设计
+2. TS(ArkTS)语言壁垒在鸿蒙这块降得很低，学习成本低，很好上手
+3. 总得来说，非常nice，效率和舒适度比Android和Flutter高很多，内置控件和容器非常丰富，并且可定制化能力也很高
+4. 未来可期，同时期待Flutter早日完美适配鸿蒙
 
 ### 后续目标
 
