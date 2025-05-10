@@ -2,7 +2,7 @@ import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import { PhotoPickerUtils } from '../../utils/PhotoPickerUtils'
 import WindowManager from '../../utils/WindowManager'
-import { ToastUtils } from '../../utils/ToastUtils'
+import { Toast } from '../../utils/Toast'
 
 @Preview
 @Component
@@ -23,7 +23,7 @@ export default struct Mine {
               uri => {
                 this.imgPath = uri;
               }, errMsg => {
-              ToastUtils.show(errMsg)
+              Toast.show(errMsg)
             })
           })
 
@@ -142,5 +142,5 @@ export default struct Mine {
 }
 
 const unDevTip = () => {
-  ToastUtils.show("二级页面正在开发中...")
+  Toast.show("二级页面正在开发中...")
 }

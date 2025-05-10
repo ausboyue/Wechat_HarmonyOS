@@ -2,7 +2,7 @@ import prompt from '@ohos.promptAction';
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
-import { ToastUtils } from '../../utils/ToastUtils';
+import { Toast } from '../../utils/Toast';
 import WindowManager from '../../utils/WindowManager';
 
 @Entry
@@ -201,5 +201,5 @@ export default struct SearchPage {
 }
 
 const unDevTip = () => {
-  ToastUtils.show("功能正在开发中...")
+  Toast.show("功能正在开发中...")
 }

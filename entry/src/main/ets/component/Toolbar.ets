@@ -1,6 +1,6 @@
 import router from '@ohos.router'
 import WindowManager from '../utils/WindowManager'
-import { ToastUtils } from '../utils/ToastUtils'
+import { Toast } from '../utils/Toast'
 
 @Preview
 @Component
@@ -54,5 +54,5 @@ export default struct Toolbar {
 }
 
 const unDevTip = () => {
-  ToastUtils.show("功能正在开发中...")
+  Toast.show("功能正在开发中...")
 }

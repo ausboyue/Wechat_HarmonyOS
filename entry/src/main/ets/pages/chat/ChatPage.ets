@@ -7,7 +7,7 @@ import WindowManager from '../../utils/WindowManager';
 import ChatFunctionBar from './ChatFuntionBar';
 import { ChatContentItemData } from './ChatContentItemData';
 import ChatPageParam from './ChatPageParam';
-import { ToastUtils } from '../../utils/ToastUtils';
+import { Toast } from '../../utils/Toast';
 import SpeechRecognizerManager from '../../utils/SpeechRecognizerManager';
 import { AudioCaptureManager, RecordFile } from '../../utils/AudioCapturerManager';
 import { componentUtils } from '@kit.ArkUI';
@@ -361,7 +361,7 @@ export default struct ChatPage {
             .onClick(async () => {
               const result = await PermissionUtils.request(["ohos.permission.MICROPHONE"])
               if (!result) {
-                ToastUtils.show("请先授权麦克风权限")
+                Toast.show("请先授权麦克风权限")
               }
               this.inputType = WXInputType.voice
               this.showFuncBarWithAnim(false)
@@ -679,6 +679,6 @@ export default struct ChatPage {
 
 
 const unDevTip = () => {
-  ToastUtils.show("功能正在开发中...")
+  Toast.show("功能正在开发中...")
 }
 
